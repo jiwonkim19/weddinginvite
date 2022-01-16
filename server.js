@@ -2,6 +2,15 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const port = 3000;
+const { Pool, Client } = require('pg')
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'weddinginvite',
+  password: 'password',
+  port: 5432,
+})
 
 app.use(express.static('client/dist'));
 
@@ -20,7 +29,8 @@ app.post('/bar', (req, res) => {
   serverObj.push(example1)
 })
 
-app.get('/foo', (req, res) => {
-  const test = {foo : 'bar'}
-  res.send(test)
+app.get('/foo', async (req, res) => {
+  const template = 'SELECT * from weddinglist'
+  const response = await pool.query(template)
+  res.json(response.rows)
 })
