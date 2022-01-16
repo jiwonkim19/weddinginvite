@@ -3,6 +3,7 @@ const app = express();
 app.use(express.json());
 const port = 3000;
 const { Pool, Client } = require('pg')
+const bodyParser = require('body-parser')
 
 const pool = new Pool({
   user: 'postgres',
@@ -12,7 +13,16 @@ const pool = new Pool({
   port: 5432,
 })
 
+//MIDDLEWARE
 app.use(express.static('client/dist'));
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+)
+
+//ROUTES
 
 app.listen(port, () => {
   console.log('Server is running at http://localhost:' + port);
@@ -30,7 +40,13 @@ app.post('/bar', (req, res) => {
 })
 
 app.get('/foo', async (req, res) => {
-  const template = 'SELECT * from weddinglist'
-  const response = await pool.query(template)
-  res.json(response.rows)
+  const template = 'SELECT name FROM weddinglist LIMIT 1'
+  const oneString = await pool.query(template)
+
+  const body = {
+    foo: oneString.rows[0].name
+  }
+  res.json(body)
 })
+
+
