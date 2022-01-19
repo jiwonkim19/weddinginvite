@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Client from '../lib/client.js'
 
 const Foo = () => {
-  const client = new Client('http://localhost:3000')
+  const client = new Client('http://localhost:5000')
   const [foo, setFoo] = useState('')
 
   useEffect(() => {

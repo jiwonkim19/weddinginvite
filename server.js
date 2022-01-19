@@ -1,30 +1,31 @@
 const express = require("express");
-const app = express();
-app.use(express.json());
-const port = process.env['PORT'];
-const cors = require('cors')
+const port = process.env.PORT || 5000
 const path = require('path')
 
-app.use(express.static('client/dist'));
-app.use(cors());
+// app.listen(port, () => {
+//   console.log('Server is running at http://localhost:' + port);
+// });
 
+// let serverObj = []
 
-app.listen(port, () => {
-  console.log('Server is running at http://localhost:' + port);
-});
+// app.get('/bar', (req, res) => {
+//   res.send(serverObj)
+// })
 
-let serverObj = []
+// app.post('/bar', (req, res) => {
+//   const example1 = req.body
+//   serverObj.push(example1)
+// })
 
-app.get('/bar', (req, res) => {
-  res.send(serverObj)
-})
+// app.get('/foo', (req, res) => {
+//   const test = {foo : 'bar'}
+//   res.send(test)
+// })
 
-app.post('/bar', (req, res) => {
-  const example1 = req.body
-  serverObj.push(example1)
-})
-
-app.get('/foo', (req, res) => {
-  const test = {foo : 'bar'}
-  res.send(test)
-})
+express()
+  .use(express.static(path.join(__dirname, 'client/dist')))
+  .get('/foo', (req, res) => {
+    const test = {foo : 'bar'}
+    res.send(test)
+  })
+  .listen(port, () => console.log('Server is running at http://localhost:' + port))
