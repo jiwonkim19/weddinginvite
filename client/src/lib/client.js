@@ -1,12 +1,6 @@
 class Client {
-  constructor(baseURL) {
-    this.baseURL = baseURL
-  }
-
   async fetchFoo() {
-    const url = this.baseURL + '/foo'
-
-    return this.get(url);
+    return this.get('/foo');
   }
 
   async get(url) {
