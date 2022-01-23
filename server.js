@@ -1,6 +1,8 @@
 const express = require("express");
 const port = process.env.PORT || 5000
 const path = require('path')
+const db = require('./models/index.js')
+const Sequelize = require('sequelize')
 
 // app.listen(port, () => {
 //   console.log('Server is running at http://localhost:' + port);
@@ -20,12 +22,21 @@ const path = require('path')
 // app.get('/foo', (req, res) => {
 //   const test = {foo : 'bar'}
 //   res.send(test)
-// })
+// }
 
 express()
   .use(express.static(path.join(__dirname, 'client/dist')))
   .get('/foo', (req, res) => {
     const test = {foo : 'bar'}
     res.send(test)
+  })
+  .get('/rsvp', (req, res) => {
+    // db.RSVP.create({name: "Chris Kim", rsvp: "accept", food: "beef"})
+    // .then(newRsvp => console.log(newRsvp))
+   db.RSVP.findAll()
+   .then((data)=> {
+     res.send(data)
+    })
+
   })
   .listen(port, () => console.log('Server is running at http://localhost:' + port))
