@@ -1,5 +1,3 @@
-
-
 ## React Boilerplate
 
 The following repo contains a very basic setup
@@ -39,3 +37,12 @@ In the `src/ directory` we have the bare bones of a basic react app that has an 
 ### Webpack Config
 
 Uses babel to precompile and currently is only set up for .jsx files
+
+
+
+# Database
+run migrations:
+```
+heroku run sequelize db:migrate --env production
+```
+
