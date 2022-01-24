@@ -15,10 +15,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "postgres",
-    "password": "password",
-    "database": "weddinginvite",
-    "host": "localhost",
+    "username": "process.env.USERNAME",
+    "password": "process.env.PASSWORD",
+    "database": "process.env.DATABASE",
+    "host": "process.env.PROD_HOST",
     "dialect": "postgres",
     "operatorsAliases": false,
     "use_env_variable": "DATABASE_URL"
