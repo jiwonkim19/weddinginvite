@@ -1,52 +1,43 @@
 const express = require("express");
-const app = express();
-app.use(express.json());
-const port = 3000;
-const { Pool, Client } = require('pg')
-const bodyParser = require('body-parser')
+const port = process.env.PORT || 5000
+const path = require('path')
+const db = require('./models/index.js')
+const Sequelize = require('sequelize')
 
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'weddinginvite',
-  password: 'password',
-  port: 5432,
-})
+// app.listen(port, () => {
+//   console.log('Server is running at http://localhost:' + port);
+// });
 
-//MIDDLEWARE
-app.use(express.static('client/dist'));
-app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
+// let serverObj = []
+
+// app.get('/bar', (req, res) => {
+//   res.send(serverObj)
+// })
+
+// app.post('/bar', (req, res) => {
+//   const example1 = req.body
+//   serverObj.push(example1)
+// })
+
+// app.get('/foo', (req, res) => {
+//   const test = {foo : 'bar'}
+//   res.send(test)
+// }
+
+express()
+  .use(express.static(path.join(__dirname, 'client/dist')))
+  .get('/foo', (req, res) => {
+    const test = {foo : 'bar'}
+    res.send(test)
   })
-)
+  .get('/rsvp', (req, res) => {
+    // db.RSVP.create({name: "Chris Kim", rsvp: "accept", food: "beef"})
+    // .then(newRsvp => console.log(newRsvp))
+   db.RSVP.findAll()
+   .then((data)=> {
+     res.send(data)
+    })
 
-//ROUTES
-
-app.listen(port, () => {
-  console.log('Server is running at http://localhost:' + port);
-});
-
-let serverObj = []
-
-app.get('/bar', (req, res) => {
-  res.send(serverObj)
-})
-
-app.post('/bar', (req, res) => {
-  const example1 = req.body
-  serverObj.push(example1)
-})
-
-app.get('/foo', async (req, res) => {
-  const template = 'SELECT name FROM weddinglist LIMIT 1'
-  const oneString = await pool.query(template)
-
-  const body = {
-    foo: oneString.rows[0].name
-  }
-  res.json(body)
-})
-
+  })
+  .listen(port, () => console.log('Server is running at http://localhost:' + port))
 
