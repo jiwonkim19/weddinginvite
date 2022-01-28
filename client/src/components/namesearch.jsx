@@ -29,7 +29,20 @@ const NameSearch = () => {
                         placeholder="e.g.John and Jane Smith" onChange={
                             handleChange
                         } />
-                    <button>Find RSVP</button>
+                    <button
+                        type="submit"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          fetch('/guestlist')
+                          .then(resp => {
+                            return resp.json()
+                          })
+                          .then(resp => {
+                            setList(resp)
+                          })}}
+                          
+                    >Find RSVP
+                    </button>
                 </div>
             </form>
             <ol>

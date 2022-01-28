@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import NameSearch from './components/namesearch.jsx'
 
 ReactDOM.render(
-  // <App />,
-  <NameSearch />,
+  <App />,
+  // <NameSearch />,
   document.getElementById('root')
 );
