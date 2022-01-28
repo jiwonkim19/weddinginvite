@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { render } from "react-dom";
 
-// import App from './components/App.jsx';
-import NameSearch from './components/namesearch.jsx'
+import App from './components/App.jsx';
+
 
 ReactDOM.render(
-  <App />,
-  // <NameSearch />,
+    <App />,
   document.getElementById('root')
 );

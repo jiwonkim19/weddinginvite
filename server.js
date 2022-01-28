@@ -37,7 +37,9 @@ express()
    .then((data)=> {
      res.send(data)
     })
-
+  })
+  .get('/frontpage', (req, res) => {
+  res.send(namesearch)
   })
   .listen(port, () => console.log('Server is running at http://localhost:' + port))
 
