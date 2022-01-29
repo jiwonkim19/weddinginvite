@@ -31,8 +31,6 @@ express()
     res.send(test)
   })
   .get('/rsvp', (req, res) => {
-    // db.RSVP.create({name: "Chris Kim", rsvp: "accept", food: "beef"})
-    // .then(newRsvp => console.log(newRsvp))
    db.RSVP.findAll()
    .then((data)=> {
      res.send(data)
