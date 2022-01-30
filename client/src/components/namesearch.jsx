@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 
+
 const NameSearch = () => {
     const [name, setName] = useState('')
+    const [matchname, setmatchname] = useState('')
 
     const handleChange = (event) => {
         setName(event.target.value)
     }
 
     //fetch from db, backend to find matching name that was input
-    const getName = () => {
-        fetch('http://localhost:5000/rsvp')
+    const getName = (name) => {
+         fetch(`/name/${name}`)
             .then(resp => {
-                console.log(resp.json())
+                return resp.json()
             })
-            // .then(resp => {
-            //     setList(resp)
-            // })
+            .then(hi => {
+                setmatchname(hi)
+            })
+            console.log(matchname)
     }
+
     return (
         <div
             style={{
@@ -35,12 +39,15 @@ const NameSearch = () => {
                 <div>
                     <h3>ENTER THE NAME ON YOUR INVITATION</h3>
                     <input type="text" id="name" name="guestname"
-                        placeholder="e.g.John and Jane Smith" />
+                        placeholder="e.g.John and Jane Smith"
+                        onChange={
+                            handleChange
+                         } />
                     <button
                         type="submit"
                         onClick={(e) => {
                             e.preventDefault()
-                            getName()
+                            getName(name)
                         }}
 
                     >Find RSVP
@@ -48,7 +55,7 @@ const NameSearch = () => {
                 </div>
             </form>
             <ol>
-                <li>MATCHING NAME</li>
+                <li>{matchname}</li>
             </ol>
             <Link to="/foo">FOO</Link>
         </div>
