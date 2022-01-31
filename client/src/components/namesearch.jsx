@@ -19,7 +19,6 @@ const NameSearch = () => {
             .then(hi => {
                 setmatchname(hi)
             })
-            console.log(matchname)
     }
 
     return (
@@ -54,9 +53,17 @@ const NameSearch = () => {
                     </button>
                 </div>
             </form>
-            <ol>
+            {matchname !== '' ?
+            <div>
+            <ul>
                 <li>{matchname}</li>
-            </ol>
+            </ul> 
+            </div>
+            :
+            <div>
+            <h3>No match found</h3>
+            </div>
+            }
             <Link to="/foo">FOO</Link>
         </div>
     )
