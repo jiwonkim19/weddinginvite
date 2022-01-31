@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Foo from './Foo.jsx'
+import NameSearch from './namesearch.jsx'
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +11,13 @@ class App extends Component {
 
   render() {
     return (
-      <Foo/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<NameSearch />} />
+          <Route path="/foo" element={<Foo />} />
+        </Routes>
+
+      </BrowserRouter>
     );
   }
 }

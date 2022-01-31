@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
+
 
 const NameSearch = () => {
     const [name, setName] = useState('')
+    const [matchname, setmatchname] = useState('')
 
     const handleChange = (event) => {
-        setEntry(event.target.value)
+        setName(event.target.value)
     }
 
     //fetch from db, backend to find matching name that was input
+    const getName = (name) => {
+         fetch(`/name/${name}`)
+            .then(resp => {
+                return resp.json()
+            })
+            .then(hi => {
+                setmatchname(hi)
+            })
+    }
 
     return (
         <div
@@ -24,30 +36,35 @@ const NameSearch = () => {
             <h2>RSVP</h2>
             <form>
                 <div>
-                    <h1>ENTER THE NAME ON YOUR INVITATION</h1>
+                    <h3>ENTER THE NAME ON YOUR INVITATION</h3>
                     <input type="text" id="name" name="guestname"
-                        placeholder="e.g.John and Jane Smith" onChange={
+                        placeholder="e.g.John and Jane Smith"
+                        onChange={
                             handleChange
-                        } />
+                         } />
                     <button
                         type="submit"
                         onClick={(e) => {
-                          e.preventDefault()
-                          fetch('/guestlist')
-                          .then(resp => {
-                            return resp.json()
-                          })
-                          .then(resp => {
-                            setList(resp)
-                          })}}
-                          
+                            e.preventDefault()
+                            getName(name)
+                        }}
+
                     >Find RSVP
                     </button>
                 </div>
             </form>
-            <ol>
-                <li>MATCHING NAME</li>
-            </ol>
+            {matchname !== '' ?
+            <div>
+            <ul>
+                <li>{matchname}</li>
+            </ul> 
+            </div>
+            :
+            <div>
+            <h3>No match found</h3>
+            </div>
+            }
+            <Link to="/foo">FOO</Link>
         </div>
     )
 }
