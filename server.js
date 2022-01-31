@@ -45,9 +45,12 @@ express()
         }
       }
     })
-    .then((dataname) => {
-      res.send(dataname[0].dataValues.name)
-    })
+      .then((dataname) => {
+        return dataname[0].dataValues.name
+      })
+      .then((finalname) => {
+        res.json(`${finalname}`)
+      })
   })
   .listen(port, () => console.log('Server is running at http://localhost:' + port))
 
