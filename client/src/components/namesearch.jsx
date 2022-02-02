@@ -13,25 +13,17 @@ const NameSearch = () => {
 
     //fetch from db, backend to find matching name that was input
     const getName = (name) => {
-        let navigate = useNavigate()
 
-        fetch(`/name/${name}`)
+        return fetch(`/name/${name}`)
             .then(resp => {
                 return resp.json()
-            })
-            .then(hi => {
-                if
-                    (hi[1] === 'accept'
-                ) {
-                    navigate("/foo")
-                } else {
-                    console.log('not working')
-                }
             })
     }
 
     // if (hi[1] === null) { link to rsvp form} 
 
+    let navigate = useNavigate()
+    
     return (
         <div
             style={{
@@ -58,6 +50,15 @@ const NameSearch = () => {
                         onClick={(e) => {
                             e.preventDefault()
                             getName(name)
+                            .then(hi => {
+                                if
+                                    (hi[1] === 'accept'
+                                ) {
+                                    navigate("/foo")
+                                } else {
+                                    console.log('not working')
+                                }
+                            })
                         }}
 
                     >Find RSVP
