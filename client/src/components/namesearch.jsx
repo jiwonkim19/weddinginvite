@@ -12,7 +12,7 @@ const NameSearch = () => {
 
 
     //fetch from db, backend to find matching name that was input
-    const getName = (name) => {
+    const getRSVP = (name) => {
 
         return fetch(`/name/${name}`)
             .then(resp => {
@@ -23,7 +23,7 @@ const NameSearch = () => {
     // if (hi[1] === null) { link to rsvp form} 
 
     let navigate = useNavigate()
-    
+
     return (
         <div
             style={{
@@ -49,7 +49,7 @@ const NameSearch = () => {
                         type="submit"
                         onClick={(e) => {
                             e.preventDefault()
-                            getName(name)
+                            getRSVP(name)
                             .then(hi => {
                                 if
                                     (hi[1] === 'accept'
