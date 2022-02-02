@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const NameSearch = () => {
@@ -10,16 +10,27 @@ const NameSearch = () => {
         setName(event.target.value)
     }
 
+
     //fetch from db, backend to find matching name that was input
     const getName = (name) => {
-         fetch(`/name/${name}`)
+        let navigate = useNavigate()
+
+        fetch(`/name/${name}`)
             .then(resp => {
                 return resp.json()
             })
             .then(hi => {
-                setmatchname(hi)
+                if
+                    (hi[1] === 'accept'
+                ) {
+                    navigate("/foo")
+                } else {
+                    console.log('not working')
+                }
             })
     }
+
+    // if (hi[1] === null) { link to rsvp form} 
 
     return (
         <div
@@ -41,7 +52,7 @@ const NameSearch = () => {
                         placeholder="e.g.John and Jane Smith"
                         onChange={
                             handleChange
-                         } />
+                        } />
                     <button
                         type="submit"
                         onClick={(e) => {
@@ -54,15 +65,15 @@ const NameSearch = () => {
                 </div>
             </form>
             {matchname !== '' ?
-            <div>
-            <ul>
-                <li>{matchname}</li>
-            </ul> 
-            </div>
-            :
-            <div>
-            <h3>No match found</h3>
-            </div>
+                <div>
+                    <ul>
+                        <li>{matchname}</li>
+                    </ul>
+                </div>
+                :
+                <div>
+                    <h3>No match found</h3>
+                </div>
             }
             <Link to="/foo">FOO</Link>
         </div>
