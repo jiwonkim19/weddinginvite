@@ -12,7 +12,7 @@ const RSVP = () => {
     food: '',
   });
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Form>
