@@ -54,7 +54,7 @@ const NameSearch = () => {
                                 if
                                     (hi[1] === 'accept'
                                 ) {
-                                    navigate("/foo")
+                                    navigate(`/rsvp/${name}`)
                                 } else {
                                     console.log('not working')
                                 }
