@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Foo from './Foo.jsx'
 import NameSearch from './namesearch.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor(props) {
