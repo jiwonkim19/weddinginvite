@@ -52,7 +52,7 @@ const NameSearch = () => {
                             getRSVP(name)
                             .then(hi => {
                                 if
-                                    (hi[1] === 'accept'
+                                    (hi.rsvp === 'accept'
                                 ) {
                                     navigate(`/rsvp/${name}`)
                                 } else {
