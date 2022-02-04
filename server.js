@@ -46,15 +46,12 @@ express()
       }
     })
       .then((dataname) => {
-        if (dataname.length === 0)
-        {res.json("No record found")}
-        else{
-         res.json(
-          [dataname[0].dataValues.name,
-      dataname[0].dataValues.rsvp]
+        if (dataname.length === 0) { res.json("No record found") }
+        else {
+          res.json(
+            dataname[0].dataValues
           )
         }
       })
   })
   .listen(port, () => console.log('Server is running at http://localhost:' + port))
-
