@@ -4,28 +4,14 @@ const path = require('path')
 const db = require('./models/index.js')
 const Sequelize = require('sequelize')
 const { Op } = require("sequelize")
+const bodyParser = require('body-parser')
 
-// app.listen(port, () => {
-//   console.log('Server is running at http://localhost:' + port);
-// });
-
-// let serverObj = []
-
-// app.get('/bar', (req, res) => {
-//   res.send(serverObj)
-// })
-
-// app.post('/bar', (req, res) => {
-//   const example1 = req.body
-//   serverObj.push(example1)
-// })
-
-// app.get('/foo', (req, res) => {
-//   const test = {foo : 'bar'}
-//   res.send(test)
-// }
 
 express()
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({
+    extended: true,
+  }))
   .use(express.static(path.join(__dirname, 'client/dist')))
   .get('/foo', (req, res) => {
     const test = { foo: 'bar' }
@@ -53,5 +39,20 @@ express()
           )
         }
       })
+  })
+  .put('/rsvp/:name', (req, res) => {
+    db.RSVP.update(
+      {
+        rsvp: req.body.rsvp.attendance,
+        food: req.body.rsvp.food,
+      },
+      {
+        where: {
+          name: {
+            [Op.iLike]: `%${req.params.name}%`
+          }
+        }
+      }
+    )
   })
   .listen(port, () => console.log('Server is running at http://localhost:' + port))

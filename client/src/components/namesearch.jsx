@@ -56,7 +56,7 @@ const NameSearch = () => {
                                 ) {
                                     navigate(`/rsvp/${name}`)
                                 } else {
-                                    console.log('not working')
+                                    <h3>No Match Found</h3>
                                 }
                             })
                         }}
@@ -65,18 +65,6 @@ const NameSearch = () => {
                     </button>
                 </div>
             </form>
-            {matchname !== '' ?
-                <div>
-                    <ul>
-                        <li>{matchname}</li>
-                    </ul>
-                </div>
-                :
-                <div>
-                    <h3>No match found</h3>
-                </div>
-            }
-            <Link to="/foo">FOO</Link>
         </div>
     )
 }
