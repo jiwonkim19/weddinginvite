@@ -59,7 +59,7 @@ const RSVP = () => {
           fetch(`/rsvp/${name}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: rsvp
+            body: JSON.stringify({ rsvp })
           });
 
           navigate('/confirmed');
