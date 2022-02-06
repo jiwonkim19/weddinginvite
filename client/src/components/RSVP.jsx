@@ -15,9 +15,18 @@ const RSVP = () => {
   const navigate = useNavigate();
 
   return (
-    <Form>
+
+    <Form  style={{
+      textAlign: "center",
+      maxWidth: "950px",
+      margin: "0 auto",
+      border: "1px solid #e6e6e6",
+      padding: "40px 25px",
+      marginTop: "50px"
+  }}
+>
       <Form.Group className="mb-3">
-        <Form.Label>We would love to see you!</Form.Label>
+        <Form.Label>Hi {name}! We would love to see you!</Form.Label>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Attendance</Form.Label>
