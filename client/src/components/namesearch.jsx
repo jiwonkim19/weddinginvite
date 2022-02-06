@@ -52,12 +52,13 @@ const NameSearch = () => {
                             getRSVP(name)
                             .then(hi => {
                                 if
-                                    (hi.rsvp === 'accept'
+                                    (hi.name === 'No record found'
                                 ) {
-                                    navigate(`/rsvp/${name}`)
+                                <h3>No record found</h3>
+                  
                                 } else {
-                                    <h3>No Match Found</h3>
-                                }
+                                  navigate(`/rsvp/${name}`)
+                                }    
                             })
                         }}
 
